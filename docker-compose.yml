@@ -1,0 +1,14 @@
+services:
+  ocr:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: text-detection-ocr:latest
+    container_name: text-detection-ocr
+    volumes:
+      - ./input:/app/input      # drop images here before running
+      - ./output:/app/output    # annotated images appear here
+    environment:
+      # Override to use a different Tesseract language (e.g. por, spa, fra)
+      TESSERACT_LANG: eng
+    restart: "no"               # run once and exit; change to "always" for a watch loop
